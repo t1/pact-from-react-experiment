@@ -1,10 +1,12 @@
 import {observer} from 'mobx-react-lite'
 import * as React from 'react'
 import DataField from "./model/DataField";
-import {PersonalDataFormStore} from "./PersonalDataFormStore";
+import {PersonalDataModel} from "./PersonalDataModel";
 
 export const PersonalDataForm = () => {
-    const personalData = new PersonalDataFormStore();
+    const personalData = new PersonalDataModel();
+
+    personalData.init();
 
     const InputField = observer(({field}: { field: DataField }) => (
         <div>
@@ -22,8 +24,9 @@ export const PersonalDataForm = () => {
 
     return (
         <div>
-            <InputField field={personalData.fullName}/>
+            <InputField field={personalData.name}/>
             <InputField field={personalData.email}/>
+            <div>{personalData.error.value}</div>
             <SubmitButton/>
         </div>
     )
