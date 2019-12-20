@@ -28,7 +28,8 @@ export class PersonalDataModel {
     @action
     public init() {
         this.set(empty);
-        fetch('sample.json')
+        // fetch('sample.json')
+        fetch('http://localhost:8000/')
             .then(acceptJson)
             .then(this.set, this.failure)
     }
