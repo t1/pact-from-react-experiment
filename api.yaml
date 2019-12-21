@@ -10,10 +10,17 @@ paths:
           description: ok
           content:
             application/json:
-              examples:
-                bar:
-                  description: hoho
-                  value: {
-                    "name": "Jane",
-                    "email": "jane@doe.org"
-                  }
+              schema:
+                $ref: '#/components/schemas/UserData'
+components:
+  schemas:
+    UserData:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Jane Doe
+        email:
+          type: string
+          example: jane@doe.org
+      required: [name, email]
