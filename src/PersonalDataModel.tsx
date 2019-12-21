@@ -1,14 +1,10 @@
 import {action, computed} from 'mobx'
+import {DefaultApi} from "./api/apis";
+import {UserData} from "./api/models";
 import DataField from './model/DataField'
 import {nonEmpty} from './model/Validators'
-import {PersonalDTO} from "./PersonalDTO";
 
-function acceptJson(response: Response) {
-    if (response.ok) return response.json();
-    else throw new Error(response.statusText);
-}
-
-const empty = JSON.parse('{"name":"","email":""}');
+const api = new DefaultApi();
 
 export class PersonalDataModel {
     public name = new DataField('name', 'Full name', nonEmpty);
@@ -20,18 +16,14 @@ export class PersonalDataModel {
     }
 
     @action.bound
-    public set(data: PersonalDTO) {
+    public set(data: UserData) {
         this.name.value = data.name;
         this.email.value = data.email;
     }
 
     @action
-    public init() {
-        this.set(empty);
-        // fetch('sample.json')
-        fetch('http://localhost:8000/')
-            .then(acceptJson)
-            .then(this.set, this.failure)
+    public load() {
+        api.rootGet().then(this.set, this.failure)
     }
 
     @action.bound failure(error: string) {

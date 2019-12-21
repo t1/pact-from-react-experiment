@@ -6,7 +6,7 @@ import {PersonalDataModel} from "./PersonalDataModel";
 export const PersonalDataForm = () => {
     const personalData = new PersonalDataModel();
 
-    personalData.init();
+    personalData.load();
 
     const InputField = observer(({field}: { field: DataField }) => (
         <div>
