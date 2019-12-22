@@ -1,10 +1,10 @@
 import {action, computed} from 'mobx'
-import {DefaultApi} from "./api/apis";
-import {UserData} from "./api/models";
 import DataField from './model/DataField'
 import {nonEmpty} from './model/Validators'
+import {PersonData} from "./PersonData";
+import PersonDataService from "./PersonDataService";
 
-const api = new DefaultApi();
+const api = new PersonDataService("http://localhost:8000");
 
 export class PersonalDataModel {
     public name = new DataField('name', 'Full name', nonEmpty);
@@ -16,14 +16,14 @@ export class PersonalDataModel {
     }
 
     @action.bound
-    public set(data: UserData) {
+    public set(data: PersonData) {
         this.name.value = data.name;
         this.email.value = data.email;
     }
 
     @action
     public load() {
-        api.rootGet().then(this.set, this.failure)
+        api.getPersonalData().then(this.set, this.failure)
     }
 
     @action.bound failure(error: string) {

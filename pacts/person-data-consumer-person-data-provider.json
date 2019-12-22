@@ -1,0 +1,34 @@
+{
+  "consumer": {
+    "name": "person-data-consumer"
+  },
+  "provider": {
+    "name": "person-data-provider"
+  },
+  "interactions": [
+    {
+      "description": "a GET request",
+      "providerState": "find-user",
+      "request": {
+        "method": "GET",
+        "path": "/"
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "name": "Jane",
+          "email": "jane@doe.org"
+        }
+      },
+      "metadata": null
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}
