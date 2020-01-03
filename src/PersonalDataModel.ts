@@ -4,7 +4,7 @@ import {nonEmpty} from './model/Validators'
 import {PersonData} from "./PersonData";
 import PersonDataService from "./PersonDataService";
 
-const api = new PersonDataService("http://localhost:8000");
+const api = new PersonDataService("http://localhost:8080");
 
 export class PersonalDataModel {
     public name = new DataField('name', 'Full name', nonEmpty);
