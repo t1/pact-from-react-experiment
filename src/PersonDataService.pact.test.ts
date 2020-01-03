@@ -41,6 +41,9 @@ describe('PersonData API', () => {
                 }).then(() => done());
             });
         });
+        afterEach((done) => {
+            pact.finalize().then(done())
+        });
 
         it('GET person data', (done) => {
             service.getPersonalData()
