@@ -1,7 +1,7 @@
 import {action, computed, observable} from 'mobx'
 import {Validator} from "./Validator";
 
-export default class DataField {
+class DataField {
     @observable public value: string = '';
 
     @computed get valid(): boolean {
@@ -14,7 +14,8 @@ export default class DataField {
 
     constructor(public name: string,
                 public label: string,
-                private validator?: Validator) {
+                private validator?: Validator,
+                public type: string = "text") {
     }
 
     @action
@@ -27,3 +28,5 @@ export default class DataField {
         this.value = newValue
     }
 }
+
+export default DataField;
